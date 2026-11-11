@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajero - Mi Cuenta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #421454;
+            --card-bg: #802C62;
+            --card-border: rgba(255, 255, 255, 0.15);
+            --primary: #FF5B42;
+            --primary-hover: #e04a33;
+            --accent: #FFD749;
+            --text-main: #ffffff;
+            --text-muted: #f3d5ea;
+            --input-bg: rgba(66, 20, 84, 0.6);
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .caja {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 32px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 440px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .saldo {
+            background: var(--bg-color);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+            .saldo p {
+                color: var(--text-muted);
+                font-size: 0.875rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                margin-bottom: 4px;
+            }
+
+            .saldo h1 {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: var(--accent);
+            }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--input-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-size: 1rem;
+            margin-bottom: 16px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+            input[type="number"]::placeholder {
+                color: var(--text-muted);
+                opacity: 0.7;
+            }
+
+            input[type="number"]:focus {
+                border-color: var(--accent);
+                box-shadow: 0 0 0 3px rgba(255, 215, 73, 0.25);
+            }
+
+        .acciones {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #btnRetirar {
+            background: rgba(255, 91, 66, 0.2);
+            color: #ff9d8f;
+            border: 1px solid var(--primary);
+        }
+
+            #btnRetirar:hover {
+                background: var(--primary);
+                color: white;
+            }
+
+        #btnDepositar {
+            background: var(--accent);
+            color: #421454;
+            font-weight: 700;
+        }
+
+            #btnDepositar:hover {
+                background: #ffe375;
+            }
+
+        h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        #listaHistorial {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+            #listaHistorial li {
+                background: var(--input-bg);
+                border: 1px solid var(--card-border);
+                padding: 12px 14px;
+                border-radius: 10px;
+                font-size: 0.85rem;
+                color: var(--text-main);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+        a {
+            display: block;
+            text-align: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+            a:hover {
+                color: var(--accent);
+            }
+    </style>
+</head>
+
+<body>
+    <div class="caja">
+        <h2>Mi Cuenta</h2>
+
+        <div class="saldo">
+            <p>Saldo disponible</p>
+            <h1>$<span id="saldo">1000</span></h1>
+        </div>
+
+        <input type="number" id="inputMonto" placeholder="Cantidad">
+        <button id="btnRetirar">Retirar</button>
+        <button id="btnDepositar">Depositar</button>
+
+        <h3>Ultimas 5 operaciones</h3>
+        <ul id="listaHistorial"></ul>
+
+        <a href="Index.html">Salir</a>
+    </div>
+
+    <script>
+
+                                const spanSaldo = document.getElementById("saldo");
+                                const inputMonto = document.getElementById("inputMonto");
+                                const btnRetirar = document.getElementById("btnRetirar");
+                                const btnDepositar = document.getElementById("btnDepositar");
+                                const listaHistorial = document.getElementById("listaHistorial");
+
+
+                                let saldo = 1000;
+                                let historial = [];
+
+
+                                if (localStorage.getItem("saldo") !== null) {
+                                    saldo = Number(localStorage.getItem("saldo"));
+                                }
+
+                                const historialGuardado = localStorage.getItem("historial");
+
+
+                                 if (historialGuardado !== null) {
+                                   historial = JSON.parse(historialGuardado);
+                                 }
+
+
+                                function mostrar() {
+                                    spanSaldo.textContent = saldo.toFixed(2);
+
+                                    listaHistorial.innerHTML = "";
+                                    historial.forEach((op) => {
+                                        const li = document.createElement("li");
+                                        li.textContent = op.tipo + " $" + op.monto + " - " + op.fecha;
+                                        listaHistorial.appendChild(li);
+                                    });
+                                }
+
+                                function registrar(tipo, monto) {
+                                    historial.unshift({
+                                        tipo: tipo,
+                                        monto: monto,
+
+                                        fecha: new Date().toLocaleString()
+                                    });
+
+
+                                    if (historial.length > 5) {
+                                        historial.pop();
+                                    }
+
+
+                                    localStorage.setItem("saldo", saldo);
+                                    localStorage.setItem("historial", JSON.stringify(historial));
+                                }
+
+
+                                btnRetirar.addEventListener("click", () => {
+                                    const monto = Number(inputMonto.value);
+
+
+                                    if (monto <= 0 || isNaN(monto)) {
+                                        alert("Escribe una cantidad válida");
+                                        return;
+                                    }
+
+
+                                    if (monto > saldo) {
+                                        alert("Fondos insuficientes");
+                                        return;
+                                    }
+
+                                    saldo = saldo - monto;
+                                    registrar("Retiro", monto);
+                                    mostrar();
+                                    inputMonto.value = "";
+                                });
+
+                                
+                                btnDepositar.addEventListener("click", () => {
+                                    const monto = Number(inputMonto.value);
+
+                                    if (monto <= 0 || isNaN(monto)) {
+                                        alert("Escribe una cantidad válida");
+                                        return;
+                                    }
+
+                                    saldo = saldo + monto;
+                                    registrar("Depósito", monto);
+                                    mostrar();
+                                    inputMonto.value = "";
+                                });
+                                mostrar();
+    </script>
+</body>
+</html>

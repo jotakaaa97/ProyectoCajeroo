@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cajero - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #421454;
+            --card-bg: linear-gradient(145deg, #802C62 0%, #5d1f48 100%);
+            --primary: #FF5B42;
+            --primary-hover: #ff735c;
+            --accent: #FFD749;
+            --text-main: #ffffff;
+            --text-muted: #e2bada;
+            --input-bg: rgba(30, 8, 40, 0.5);
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 91, 66, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            /* Fondo mejorado con un degradado radial elegante y moderno */
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 15% 15%, rgba(128, 44, 98, 0.6) 0%, transparent 45%), radial-gradient(circle at 85% 85%, rgba(255, 91, 66, 0.2) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(66, 20, 84, 0.8) 0%, #290c34 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: var(--text-main);
+        }
+
+        .caja {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 48px 36px;
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .caja::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary), var(--accent));
+            }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 28px;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            background: var(--input-bg);
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            input::placeholder {
+                color: var(--text-muted);
+                opacity: 0.6;
+                letter-spacing: normal;
+                font-size: 0.95rem;
+            }
+
+            input:focus {
+                border-color: var(--accent);
+                box-shadow: 0 0 0 4px rgba(255, 215, 73, 0.15);
+                background: rgba(30, 8, 40, 0.7);
+            }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, #e04830 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 91, 66, 0.35);
+        }
+
+            button:hover {
+                background: linear-gradient(135deg, var(--primary-hover) 0%, var(--primary) 100%);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 24px rgba(255, 91, 66, 0.45);
+            }
+
+            button:active {
+                transform: translateY(0);
+            }
+    </style>
+</head>
+
+<body>
+    <div class="caja">
+        <h2>Cajero Automático</h2>
+        <input type="password" id="inputPin" placeholder="Ingresa tu PIN">
+        <button id="btnIngresar">Ingresar</button>
+    </div>
+
+    <script>
+                
+                const inputPin = document.getElementById("inputPin");
+                const btnIngresar = document.getElementById("btnIngresar");
+
+               
+                btnIngresar.addEventListener("click", () => {
+
+                   
+                    if (inputPin.value === "1234") {
+                    
+                        window.location.href = "Cajero.html";
+                    } else {
+                      
+                        alert("PIN incorrecto");
+                        inputPin.value = "";
+                    }
+                });
+    </script>
+</body>
+</html>
